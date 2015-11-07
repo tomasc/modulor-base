@@ -10,7 +10,7 @@ RUN echo 'deb http://debian.man.ac.uk/debian/ stable main contrib non-free' | te
 RUN apt-get -q update
 
 # BASE
-RUN apt-get -y install build-essential git-core libtag1-dev
+RUN apt-get -y install build-essential git-core libtag1-dev nano
 
 # QT5
 RUN apt-get -y install qt5-default libqt5webkit5-dev
