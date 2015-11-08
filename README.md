@@ -1,6 +1,6 @@
 ## Modulor Base
 
-Vase ruby 2.2 image with preinstalled libs:
+Base ruby 2.2 image with preinstalled libs:
 
 * qt5
 * ghostscript
