@@ -21,6 +21,9 @@ RUN apt-get -y install ghostscript
 # IMAGEMAGICK
 RUN apt-get -y install imagemagick
 
+# PDFTK
+RUN apt-get -y install pdftk
+
 # PHANTOMJS
 # RUN apt-get -y install build-essential chrpath libssl-dev libxft-dev libfreetype6 libfreetype6-dev libfontconfig1 libfontconfig1-dev
 # RUN wget --no-check-certificate https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-1.9.8-linux-x86_64.tar.bz2
