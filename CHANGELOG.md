@@ -1,7 +1,15 @@
-## 08.11.2015
+## 2016-02-07
+
+* updated `phantomjs` to `2.1.1`
+* added `ttf2eot`
+* added `export TERM=xterm`
+* removed `qt5`
+* removed `ttf-mscorefonts`
+
+## 2015-11-08
 
 * added `cron`
 
-## 07.11.2015
+## 2015-11-07
 
 * added `nano`
