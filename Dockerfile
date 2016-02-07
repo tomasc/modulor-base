@@ -13,6 +13,9 @@ RUN apt-get -q update
 # BASE
 RUN apt-get -y install build-essential git-core libtag1-dev nano cron
 
+# QT5
+RUN apt-get -y install qt5-default libqt5webkit5-dev
+
 # GHOSTSCRIPT
 RUN apt-get -y install ghostscript
 

@@ -3,7 +3,6 @@
 * updated `phantomjs` to `2.1.1`
 * added `ttf2eot`
 * added `export TERM=xterm`
-* removed `qt5`
 * removed `ttf-mscorefonts`
 
 ## 2015-11-08
