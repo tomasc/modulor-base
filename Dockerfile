@@ -3,15 +3,11 @@ MAINTAINER Tomas Celizna <tomas.celizna@gmail.com>
 
 # ---------------------------------------------------------------------
 
-RUN export TERM=xterm
-
-# ---------------------------------------------------------------------
-
 # UPDATE
 RUN apt-get -q update
 
 # BASE
-RUN apt-get -y install build-essential git-core libtag1-dev nano cron
+RUN apt-get -y install build-essential git-core libtag1-dev nano cron xvfb expect-dev
 
 # QT5
 RUN apt-get -y install qt5-default libqt5webkit5-dev

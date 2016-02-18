@@ -1,3 +1,7 @@
+## 2016-02-18
+
+* added `xvfb` & `unbuffer`
+
 ## 2016-02-07
 
 * updated `phantomjs` to `2.1.1`
