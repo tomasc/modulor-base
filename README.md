@@ -10,4 +10,6 @@ Base ruby 2.2 image with preinstalled libs:
 * nodejs
 * phantomjs
 * ttf2eot
+* ttfautohint
 * qt5
+* woff2

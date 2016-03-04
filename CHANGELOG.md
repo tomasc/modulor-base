@@ -1,6 +1,10 @@
+## 2016-03-04
+
+* added `ttfautohint` & `woff2`
+
 ## 2016-02-18
 
-* added `xvfb` & `unbuffer`
+* added `unbuffer` & `xvfb`
 
 ## 2016-02-07
 

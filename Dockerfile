@@ -39,6 +39,13 @@ RUN wget --no-check-certificate https://ttf2eot.googlecode.com/files/ttf2eot-0.0
 RUN sed -i.bak "/using std::vector;/ i\#include <cstddef>" /ttf2eot-0.0.2-2/OpenTypeUtilities.h
 RUN cd ttf2eot-0.0.2-2 && make && cp ttf2eot /usr/local/bin/ttf2eot && rm -rf ttf2eot*
 
+# TTFAUTOHINT
+RUN apt-get -y install ttfautohint
+
+# WOFF2
+RUN git clone --recursive https://github.com/google/woff2.git
+RUN cd woff2 && make clean all
+
 # NODEJS
 RUN apt-get -y install nodejs
 
