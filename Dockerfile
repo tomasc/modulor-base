@@ -45,6 +45,7 @@ RUN apt-get -y install ttfautohint
 # WOFF2
 RUN git clone --recursive https://github.com/google/woff2.git
 RUN cd woff2 && make clean all
+RUN mv woff2/woff2_* /usr/local/bin && rm -rf woff2
 
 # NODEJS
 RUN apt-get -y install nodejs
