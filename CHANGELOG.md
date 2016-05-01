@@ -1,3 +1,7 @@
+## 2016-05-01
+
+* upgrade to Ruby 2.2.4
+
 ## 2016-03-04
 
 * added `ttfautohint` & `woff2`
