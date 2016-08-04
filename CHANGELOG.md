@@ -1,3 +1,7 @@
+## 2016-08-04
+
+* upgrade to Ruby 2.2.5
+
 ## 2016-05-01
 
 * upgrade to Ruby 2.2.4
