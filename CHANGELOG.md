@@ -1,3 +1,8 @@
+## 2016-08-20
+
+* added `libvips`
+* upgrade `harfbuzz` to 1.3.0
+
 ## 2016-08-04
 
 * upgrade to Ruby 2.2.5
