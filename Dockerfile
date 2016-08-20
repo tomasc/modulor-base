@@ -24,11 +24,7 @@ RUN apt-get update
 RUN apt-get install -y automake curl gobject-introspection gtk-doc-tools libglib2.0-dev libjpeg62-turbo-dev libpng12-dev libwebp-dev libtiff5-dev libexif-dev libxml2-dev swig libpango1.0-dev libmatio-dev libopenslide-dev libcfitsio3-dev
 RUN apt-get install -y libgif-dev librsvg2-dev libpoppler-glib-dev libfftw3-dev liblcms2-dev libpangoft2-1.0-0 liborc-0.4-dev libpoppler-glib-dev
 RUN curl -O http://www.vips.ecs.soton.ac.uk/supported/8.3/vips-8.3.3.tar.gz
-RUN tar zvxf vips-8.3.3.tar.gz
-RUN cd vips-8.3.3
-RUN ./configure
-RUN make
-RUN make install
+RUN tar zvxf vips-8.3.3.tar.gz && cd vips-8.3.3 && ./configure $1 && make && make install
 RUN ldconfig
 
 # PDFTK
