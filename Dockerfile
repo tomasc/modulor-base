@@ -22,7 +22,7 @@ RUN apt-get -y install imagemagick
 # POPPLER
 RUN curl -O https://poppler.freedesktop.org/poppler-0.47.0.tar.xz
 RUN tar xf poppler-0.47.0.tar.xz && cd poppler-0.47.0 && ./configure --prefix=/usr --sysconfdir=/etc --disable-static --enable-build-type=release --enable-cmyk --enable-xpdf-headers --with-testdatadir=$PWD/testfiles && make && make install
-RUN rm -tf poppler*
+RUN rm -rf poppler*
 
 # LIBVIPS
 RUN apt-get update
@@ -30,7 +30,7 @@ RUN apt-get install -y automake curl gobject-introspection gtk-doc-tools libglib
 RUN apt-get install -y libgif-dev librsvg2-dev libpoppler-glib-dev libfftw3-dev liblcms2-dev libpangoft2-1.0-0 liborc-0.4-dev libpoppler-glib-dev
 RUN curl -O http://www.vips.ecs.soton.ac.uk/supported/8.3/vips-8.3.3.tar.gz
 RUN tar zvxf vips-8.3.3.tar.gz && cd vips-8.3.3 && ./configure $1 && make && make install
-RUN rm -tf vips*
+RUN rm -rf vips*
 RUN ldconfig
 
 # PDFTK
