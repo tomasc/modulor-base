@@ -15,10 +15,6 @@ RUN apt-get -y install qt5-default libqt5webkit5-dev
 # GHOSTSCRIPT
 RUN apt-get -y install ghostscript
 
-# IMAGEMAGICK
-# NOTE: to be deprecated
-# RUN apt-get -y install imagemagick
-
 # GFX LIBS
 RUN apt-get install -y gobject-introspection gtk-doc-tools libglib2.0-dev libjpeg62-turbo-dev libpng12-dev libwebp-dev libtiff5-dev libexif-dev libxml2-dev swig libpango1.0-dev libmatio-dev libopenslide-dev libcfitsio3-dev libgif-dev librsvg2-dev libfftw3-dev liblcms2-dev libpangoft2-1.0-0 liborc-0.4-dev libcairo2-dev libfontconfig1 libfontconfig1-dev
 
@@ -46,6 +42,10 @@ RUN apt-get -y install fontforge python-fontforge
 # HARFBUZZ
 RUN wget --no-check-certificate http://www.freedesktop.org/software/harfbuzz/release/harfbuzz-1.3.0.tar.bz2 && tar -xjf harfbuzz-1.3.0.tar.bz2 --no-same-owner
 RUN cd harfbuzz-1.3.0 && ./configure && make && make install && rm -rf harfbuzz*
+
+# OT-SANITIZER
+RUN wget --no-check-certificate https://github.com/khaledhosny/ots/releases/download/v5.0.1/ots-5.0.1.tar.gz && tar -zxf ots-5.0.1.tar.gz
+RUN cd ots-5.0.1 && ./configure && make && make install && rm -rf ots-*
 
 # TTF2EOT
 RUN wget --no-check-certificate https://ttf2eot.googlecode.com/files/ttf2eot-0.0.2-2.tar.gz && tar -zxf ttf2eot-0.0.2-2.tar.gz
