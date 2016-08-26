@@ -48,7 +48,7 @@ RUN wget --no-check-certificate https://github.com/khaledhosny/ots/releases/down
 RUN cd ots-5.0.1 && ./configure && make && make install && rm -rf ots-*
 
 # TTF2EOT
-RUN wget --no-check-certificate https://ttf2eot.googlecode.com/files/ttf2eot-0.0.2-2.tar.gz && tar -zxf ttf2eot-0.0.2-2.tar.gz
+RUN wget --no-check-certificate https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/ttf2eot/ttf2eot-0.0.2-2.tar.gz && tar -zxf ttf2eot-0.0.2-2.tar.gz
 RUN sed -i.bak "/using std::vector;/ i\#include <cstddef>" /ttf2eot-0.0.2-2/OpenTypeUtilities.h
 RUN cd ttf2eot-0.0.2-2 && make && cp ttf2eot /usr/local/bin/ttf2eot && rm -rf ttf2eot*
 
