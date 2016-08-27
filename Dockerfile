@@ -44,8 +44,8 @@ RUN wget --no-check-certificate http://www.freedesktop.org/software/harfbuzz/rel
 RUN cd harfbuzz-1.3.0 && ./configure && make && make install && rm -rf harfbuzz*
 
 # FONTTOOLS
-RUN wget --no-check-certificate https://github.com/behdad/fonttools/archive/3.0.tar.gz && tar -zcf 3.0.tar.gz --no-same-owner
-RUN cd 3.0 && ./configure && make && make install && rm -rf 3.0
+RUN wget --no-check-certificate https://github.com/behdad/fonttools/archive/3.0.tar.gz && tar -zxf 3.0.tar.gz --no-same-owner
+RUN cd fonttools-3.0 && ./configure && make && make install && rm -rf fonttools*
 
 # OT-SANITIZER
 RUN wget --no-check-certificate https://github.com/khaledhosny/ots/releases/download/v5.0.1/ots-5.0.1.tar.gz && tar -zxf ots-5.0.1.tar.gz
