@@ -43,6 +43,10 @@ RUN apt-get -y install fontforge python-fontforge
 RUN wget --no-check-certificate http://www.freedesktop.org/software/harfbuzz/release/harfbuzz-1.3.0.tar.bz2 && tar -xjf harfbuzz-1.3.0.tar.bz2 --no-same-owner
 RUN cd harfbuzz-1.3.0 && ./configure && make && make install && rm -rf harfbuzz*
 
+# FONTTOOLS
+RUN wget --no-check-certificate https://github.com/behdad/fonttools/archive/3.0.tar.gz && tar -zcf 3.0.tar.gz --no-same-owner
+RUN cd 3.0 && ./configure && make && make install && rm -rf 3.0
+
 # OT-SANITIZER
 RUN wget --no-check-certificate https://github.com/khaledhosny/ots/releases/download/v5.0.1/ots-5.0.1.tar.gz && tar -zxf ots-5.0.1.tar.gz
 RUN cd ots-5.0.1 && ./configure && make && make install && rm -rf ots-*

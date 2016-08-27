@@ -1,3 +1,11 @@
+## 2016-08-26
+
+* added `fonttools`
+
+## 2016-08-26
+
+* added `ot-sanitise`
+
 ## 2016-08-20
 
 * added `libvips`
