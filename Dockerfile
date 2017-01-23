@@ -19,8 +19,8 @@ RUN apt-get -y install ghostscript
 RUN apt-get install -y gobject-introspection gtk-doc-tools libglib2.0-dev libjpeg62-turbo-dev libpng12-dev libwebp-dev libtiff5-dev libexif-dev libxml2-dev swig libpango1.0-dev libmatio-dev libopenslide-dev libcfitsio3-dev libgif-dev librsvg2-dev libfftw3-dev liblcms2-dev libpangoft2-1.0-0 liborc-0.4-dev libcairo2-dev libfontconfig1 libfontconfig1-dev
 
 # POPPLER
-RUN curl -O https://poppler.freedesktop.org/poppler-0.47.0.tar.xz
-RUN tar xf poppler-0.47.0.tar.xz && cd poppler-0.47.0 && ./configure --prefix=/usr --sysconfdir=/etc --disable-static --enable-build-type=release --enable-cmyk --enable-xpdf-headers --with-testdatadir=$PWD/testfiles && make && make install
+RUN curl -O https://poppler.freedesktop.org/poppler-0.51.0.tar.xz
+RUN tar xf poppler-0.51.0.tar.xz && cd poppler-0.51.0 && ./configure --prefix=/usr --sysconfdir=/etc --disable-static --enable-build-type=release --enable-cmyk --enable-xpdf-headers --with-testdatadir=$PWD/testfiles && make && make install
 RUN rm -rf poppler*
 
 # LIBVIPS
