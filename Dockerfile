@@ -24,8 +24,8 @@ RUN tar xf poppler-0.47.0.tar.xz && cd poppler-0.47.0 && ./configure --prefix=/u
 RUN rm -rf poppler*
 
 # LIBVIPS
-RUN curl -O http://www.vips.ecs.soton.ac.uk/supported/8.3/vips-8.3.3.tar.gz
-RUN tar zvxf vips-8.3.3.tar.gz && cd vips-8.3.3 && ./configure $1 && make && make install
+RUN curl -O http://www.vips.ecs.soton.ac.uk/supported/8.4/vips-8.4.5.tar.gz
+RUN tar zvxf vips-8.4.5.tar.gz && cd vips-8.4.5 && ./configure $1 && make && make install
 RUN rm -rf vips*
 RUN ldconfig
 
