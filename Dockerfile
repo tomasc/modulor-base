@@ -41,20 +41,24 @@ RUN apt-get -y install fontforge python-fontforge
 
 # HARFBUZZ
 RUN wget --no-check-certificate http://www.freedesktop.org/software/harfbuzz/release/harfbuzz-1.3.0.tar.bz2 && tar -xjf harfbuzz-1.3.0.tar.bz2 --no-same-owner
-RUN cd harfbuzz-1.3.0 && ./configure && make && make install && rm -rf harfbuzz*
+RUN cd harfbuzz-1.3.0 && ./configure && make && make install
+RUN rm -rf harfbuzz*
 
 # FONTTOOLS
 RUN wget --no-check-certificate https://github.com/behdad/fonttools/archive/3.0.tar.gz && tar -zxf 3.0.tar.gz --no-same-owner
-RUN cd fonttools-3.0 && make && make install && rm -rf fonttools* && rm -rf 3.0.tar.gz
+RUN cd fonttools-3.0 && make && make install && rm -rf fonttools*
+RUN rm -rf 3.0.tar.gz
 
 # OT-SANITIZER
 RUN wget --no-check-certificate https://github.com/khaledhosny/ots/releases/download/v5.0.1/ots-5.0.1.tar.gz && tar -zxf ots-5.0.1.tar.gz
-RUN cd ots-5.0.1 && ./configure && make && make install && rm -rf ots-*
+RUN cd ots-5.0.1 && ./configure && make && make install
+RUN rm -rf ots-*
 
 # TTF2EOT
 RUN wget --no-check-certificate https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/ttf2eot/ttf2eot-0.0.2-2.tar.gz && tar -zxf ttf2eot-0.0.2-2.tar.gz
 RUN sed -i.bak "/using std::vector;/ i\#include <cstddef>" /ttf2eot-0.0.2-2/OpenTypeUtilities.h
-RUN cd ttf2eot-0.0.2-2 && make && cp ttf2eot /usr/local/bin/ttf2eot && rm -rf ttf2eot*
+RUN cd ttf2eot-0.0.2-2 && make && cp ttf2eot /usr/local/bin/ttf2eot
+RUN rm -rf ttf2eot*
 
 # TTFAUTOHINT
 RUN apt-get -y install ttfautohint
