@@ -76,7 +76,6 @@ RUN apt-get -y install nodejs
 RUN apt-get install -y nginx
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
-RUN apt-get -y remove automake build-essential
 RUN apt-get -q autoclean
 RUN apt-get -q clean
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
