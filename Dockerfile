@@ -25,8 +25,9 @@ RUN rm -rf poppler*
 
 # LIBVIPS
 RUN curl -O http://www.vips.ecs.soton.ac.uk/supported/8.4/vips-8.4.5.tar.gz
-RUN tar zvxf vips-8.4.5.tar.gz && cd vips-8.4.5 && ./configure $1 && make && make install
+RUN tar zvxf vips-8.4.5.tar.gz && cd vips-8.4.5 && ./configure && make && make install
 RUN rm -rf vips*
+RUN export GI_TYPELIB_PATH=/usr/local/lib/girepository-1.0/
 RUN ldconfig
 
 # PDFTK
