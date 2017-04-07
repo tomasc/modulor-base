@@ -24,7 +24,7 @@ RUN tar xf poppler-0.51.0.tar.xz && cd poppler-0.51.0 && ./configure --prefix=/u
 RUN rm -rf poppler*
 
 # LIBVIPS
-RUN curl -O https://github.com/jcupitt/libvips/releases/download/v8.5.2/vips-8.5.2.tar.gz
+RUN curl -OL https://github.com/jcupitt/libvips/releases/download/v8.5.2/vips-8.5.2.tar.gz
 RUN tar zvxf vips-8.5.2.tar.gz && cd vips-8.5.2 && ./configure && make && make install
 RUN rm -rf vips*
 RUN export GI_TYPELIB_PATH=/usr/local/lib/girepository-1.0/
