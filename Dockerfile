@@ -1,5 +1,6 @@
 FROM ruby:2.3
 MAINTAINER Tomas Celizna <tomas.celizna@gmail.com>
+ENV LANG C.UTF-8
 
 # ---------------------------------------------------------------------
 
