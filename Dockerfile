@@ -71,7 +71,13 @@ RUN cd woff2 && make clean all
 RUN mv woff2/woff2_* /usr/local/bin && rm -rf woff2
 
 # NODEJS
-RUN apt-get -y install nodejs
+RUN curl -sL https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh -o install_nvm.sh
+RUN bash install_nvm.sh && rm install_nvm.sh && source ~/.profile
+RUN nvm install 8.1.1 
+
+# CHROM-REMOTE-INTERFACE
+RUN apt-get -y install npm
+RUN npm install --global chrome-remote-interface
 
 # NGINX
 RUN apt-get install -y nginx
