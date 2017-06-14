@@ -73,7 +73,7 @@ RUN mv woff2/woff2_* /usr/local/bin && rm -rf woff2
 # NODEJS
 RUN curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh
 RUN bash nodesource_setup.sh
-RUN apt-get -y install nodejs npm
+RUN apt-get -y install nodejs
 
 # CHROME-REMOTE-INTERFACE
 RUN npm install --global chrome-remote-interface
