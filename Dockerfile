@@ -72,10 +72,10 @@ RUN mv woff2/woff2_* /usr/local/bin && rm -rf woff2
 
 # NODEJS
 RUN curl -sL https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh -o install_nvm.sh
-RUN bash install_nvm.sh && rm install_nvm.sh && source ~/.profile
+RUN bash install_nvm.sh && rm install_nvm.sh
 RUN nvm install 8.1.1 
 
-# CHROM-REMOTE-INTERFACE
+# CHROME-REMOTE-INTERFACE
 RUN apt-get -y install npm
 RUN npm install --global chrome-remote-interface
 
