@@ -75,9 +75,6 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh
 RUN bash nodesource_setup.sh
 RUN apt-get -y install nodejs
 
-# CHROME-REMOTE-INTERFACE
-RUN npm install --global chrome-remote-interface
-
 # NGINX
 RUN apt-get install -y nginx
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
