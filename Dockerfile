@@ -3,6 +3,16 @@ MAINTAINER Tomas Celizna <tomas.celizna@gmail.com>
 
 # ---------------------------------------------------------------------
 
+ENV fonttools_version=3.15.1
+ENV harfbuzz_version=1.3.0
+ENV libvips_version=8.5.8
+ENV ots_version=6.0.0
+ENV phantomjs_version=2.1.1
+ENV poppler_version=0.59.0
+ENV ttf2eot_version=0.0.2-2
+
+# ---------------------------------------------------------------------
+
 # UPDATE
 RUN apt-get -q update
 
@@ -19,13 +29,13 @@ RUN apt-get -y install ghostscript
 RUN apt-get install -y gobject-introspection gtk-doc-tools libglib2.0-dev libjpeg62-turbo-dev libpng12-dev libwebp-dev libtiff5-dev libexif-dev libxml2-dev swig libpango1.0-dev libmatio-dev libopenslide-dev libcfitsio3-dev libgif-dev librsvg2-dev libfftw3-dev liblcms2-dev libpangoft2-1.0-0 liborc-0.4-dev libcairo2-dev libfontconfig1 libfontconfig1-dev
 
 # POPPLER
-RUN curl -O https://poppler.freedesktop.org/poppler-0.47.0.tar.xz
-RUN tar xf poppler-0.47.0.tar.xz && cd poppler-0.47.0 && ./configure --prefix=/usr --sysconfdir=/etc --disable-static --enable-build-type=release --enable-cmyk --enable-xpdf-headers --with-testdatadir=$PWD/testfiles && make && make install
+RUN curl -O https://poppler.freedesktop.org/poppler-${poppler_version}.tar.xz
+RUN tar xf poppler-${poppler_version}.tar.xz && cd poppler-${poppler_version} && ./configure --prefix=/usr --sysconfdir=/etc --disable-static --enable-build-type=release --enable-cmyk --enable-xpdf-headers --with-testdatadir=$PWD/testfiles && make && make install
 RUN rm -rf poppler*
 
 # LIBVIPS
-RUN curl -O http://www.vips.ecs.soton.ac.uk/supported/8.3/vips-8.3.3.tar.gz
-RUN tar zvxf vips-8.3.3.tar.gz && cd vips-8.3.3 && ./configure $1 && make && make install
+RUN curl -OL https://github.com/jcupitt/libvips/releases/download/v${libvips_version}/vips-${libvips_version}.tar.gz
+RUN tar zvxf vips-${libvips_version}.tar.gz && cd vips-${libvips_version} && ./configure $1 && make && make install
 RUN rm -rf vips*
 RUN ldconfig
 
@@ -33,28 +43,28 @@ RUN ldconfig
 RUN apt-get -y install pdftk
 
 # PHANTOMJS
-RUN wget --no-check-certificate https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2 && tar -xjf phantomjs-2.1.1-linux-x86_64.tar.bz2
-RUN mv phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/local/bin && chmod +x /usr/local/bin/phantomjs && rm -rf phantomjs*
+RUN wget --no-check-certificate https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-${phantomjs_version}-linux-x86_64.tar.bz2 && tar -xjf phantomjs-${phantomjs_version}-linux-x86_64.tar.bz2
+RUN mv phantomjs-${phantomjs_version}-linux-x86_64/bin/phantomjs /usr/local/bin && chmod +x /usr/local/bin/phantomjs && rm -rf phantomjs*
 
 # FONTFORGE
 RUN apt-get -y install fontforge python-fontforge
 
 # HARFBUZZ
-RUN wget --no-check-certificate http://www.freedesktop.org/software/harfbuzz/release/harfbuzz-1.3.0.tar.bz2 && tar -xjf harfbuzz-1.3.0.tar.bz2 --no-same-owner
-RUN cd harfbuzz-1.3.0 && ./configure && make && make install && rm -rf harfbuzz*
+RUN wget --no-check-certificate http://www.freedesktop.org/software/harfbuzz/release/harfbuzz-${harfbuzz_version}.tar.bz2 && tar -xjf harfbuzz-${harfbuzz_version}.tar.bz2 --no-same-owner
+RUN cd harfbuzz-${harfbuzz_version} && ./configure && make && make install && rm -rf harfbuzz*
 
 # FONTTOOLS
-RUN wget --no-check-certificate https://github.com/behdad/fonttools/archive/3.0.tar.gz && tar -zxf 3.0.tar.gz --no-same-owner
-RUN cd fonttools-3.0 && make && make install && rm -rf fonttools* && rm -rf 3.0.tar.gz
+RUN wget --no-check-certificate https://github.com/fonttools/fonttools/releases/download/${fonttools_version}/fonttools-${fonttools_version}.zip && tar -zxf fonttools-${fonttools_version}.zip --no-same-owner
+RUN cd fonttools-${fonttools_version} && make && make install && rm -rf fonttools* && rm -rf fonttools-${fonttools_version}.tar.gz
 
 # OT-SANITIZER
-RUN wget --no-check-certificate https://github.com/khaledhosny/ots/releases/download/v5.0.1/ots-5.0.1.tar.gz && tar -zxf ots-5.0.1.tar.gz
-RUN cd ots-5.0.1 && ./configure && make && make install && rm -rf ots-*
+RUN wget --no-check-certificate https://github.com/khaledhosny/ots/releases/download/v${ots_version}/ots-${ots_version}.tar.gz && tar -zxf ots-${ots_version}.tar.gz
+RUN cd ots-${ots_version} && ./configure && make && make install && rm -rf ots-*
 
 # TTF2EOT
-RUN wget --no-check-certificate https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/ttf2eot/ttf2eot-0.0.2-2.tar.gz && tar -zxf ttf2eot-0.0.2-2.tar.gz
-RUN sed -i.bak "/using std::vector;/ i\#include <cstddef>" /ttf2eot-0.0.2-2/OpenTypeUtilities.h
-RUN cd ttf2eot-0.0.2-2 && make && cp ttf2eot /usr/local/bin/ttf2eot && rm -rf ttf2eot*
+RUN wget --no-check-certificate https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/ttf2eot/ttf2eot-${ttf2eot_version}.tar.gz && tar -zxf ttf2eot-${ttf2eot_version}.tar.gz
+RUN sed -i.bak "/using std::vector;/ i\#include <cstddef>" /ttf2eot-${ttf2eot_version}/OpenTypeUtilities.h
+RUN cd ttf2eot-${ttf2eot_version} && make && cp ttf2eot /usr/local/bin/ttf2eot && rm -rf ttf2eot*
 
 # TTFAUTOHINT
 RUN apt-get -y install ttfautohint
