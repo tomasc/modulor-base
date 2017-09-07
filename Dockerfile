@@ -1,5 +1,6 @@
-FROM ruby:2.2.5
+FROM ruby:2.3
 MAINTAINER Tomas Celizna <tomas.celizna@gmail.com>
+ENV LANG C.UTF-8
 
 # ---------------------------------------------------------------------
 
@@ -26,7 +27,7 @@ RUN apt-get -y install qt5-default libqt5webkit5-dev
 RUN apt-get -y install ghostscript
 
 # GFX LIBS
-RUN apt-get install -y gobject-introspection gtk-doc-tools libglib2.0-dev libjpeg62-turbo-dev libpng12-dev libwebp-dev libtiff5-dev libexif-dev libxml2-dev swig libpango1.0-dev libmatio-dev libopenslide-dev libcfitsio3-dev libgif-dev librsvg2-dev libfftw3-dev liblcms2-dev libpangoft2-1.0-0 liborc-0.4-dev libcairo2-dev libfontconfig1 libfontconfig1-dev
+RUN apt-get install -y gobject-introspection libgirepository1.0-dev gtk-doc-tools libglib2.0-dev libjpeg62-turbo-dev libpng12-dev libwebp-dev libtiff5-dev libexif-dev libxml2-dev swig libpango1.0-dev libmatio-dev libopenslide-dev libcfitsio3-dev libgif-dev librsvg2-dev libfftw3-dev liblcms2-dev libpangoft2-1.0-0 liborc-0.4-dev libcairo2-dev libfontconfig1 libfontconfig1-dev
 
 # POPPLER
 RUN curl -O https://poppler.freedesktop.org/poppler-${poppler_version}.tar.xz
@@ -37,6 +38,7 @@ RUN rm -rf poppler*
 RUN curl -OL https://github.com/jcupitt/libvips/releases/download/v${libvips_version}/vips-${libvips_version}.tar.gz
 RUN tar zvxf vips-${libvips_version}.tar.gz && cd vips-${libvips_version} && ./configure $1 && make && make install
 RUN rm -rf vips*
+RUN export GI_TYPELIB_PATH=/usr/local/lib/girepository-1.0/
 RUN ldconfig
 
 # PDFTK
@@ -75,14 +77,14 @@ RUN cd woff2 && make clean all
 RUN mv woff2/woff2_* /usr/local/bin && rm -rf woff2
 
 # NODEJS
+RUN curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh
+RUN bash nodesource_setup.sh
 RUN apt-get -y install nodejs
 
 # NGINX
 RUN apt-get install -y nginx
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
-RUN apt-get -y remove automake build-essential
-RUN apt-get -q -y autoremove
 RUN apt-get -q autoclean
 RUN apt-get -q clean
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
