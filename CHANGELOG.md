@@ -1,3 +1,7 @@
+## 2017-10-01
+
+* added `MuPDF`
+
 ## 2016-08-26
 
 * added `fonttools`
