@@ -51,7 +51,7 @@ RUN wget --no-check-certificate http://www.freedesktop.org/software/harfbuzz/rel
 RUN cd harfbuzz-${harfbuzz_version} && ./configure && make && make install && rm -rf harfbuzz*
 
 # MuPDF
-ENV mupdf_version=1.12.0
+ENV mupdf_version=1.11
 RUN wget --no-check-certificate https://mupdf.com/downloads/archive/mupdf-${mupdf_version}-source.tar.gz && tar zvxf mupdf-${mupdf_version}-source.tar.gz
 RUN cd mupdf-${mupdf_version}-source && make HAVE_X11=no HAVE_GLFW=no prefix=/usr/local install && rm -rf mupdf-*
 
