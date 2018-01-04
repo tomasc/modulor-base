@@ -27,7 +27,7 @@ RUN tar xf poppler-${poppler_version}.tar.xz && cd poppler-${poppler_version} &&
 RUN rm -rf poppler*
 
 # LIBVIPS
-ENV libvips_version=8.5.8
+ENV libvips_version=8.6.1
 RUN curl -OL https://github.com/jcupitt/libvips/releases/download/v${libvips_version}/vips-${libvips_version}.tar.gz
 RUN tar zvxf vips-${libvips_version}.tar.gz && cd vips-${libvips_version} && ./configure $1 && make && make install
 RUN rm -rf vips*
