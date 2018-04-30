@@ -1,5 +1,4 @@
-# use custom build with jemalloc for improved Ruby memory management
-FROM tomasce/ruby:2.3
+FROM ruby:2.5.1
 MAINTAINER Tomas Celizna <tomas.celizna@gmail.com>
 ENV LANG C.UTF-8
 
