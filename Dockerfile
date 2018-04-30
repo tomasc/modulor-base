@@ -17,7 +17,7 @@ RUN apt-get -y install qt5-default libqt5webkit5-dev
 RUN apt-get -y install ghostscript
 
 # GFX LIBS
-RUN apt-get install -y gobject-introspection libgirepository1.0-dev gtk-doc-tools libglib2.0-dev libjpeg62-turbo-dev libpng12-dev libwebp-dev libtiff5-dev libexif-dev libxml2-dev swig libpango1.0-dev libmatio-dev libopenslide-dev libcfitsio3-dev libgif-dev librsvg2-dev libfftw3-dev liblcms2-dev libpangoft2-1.0-0 liborc-0.4-dev libcairo2-dev libfontconfig1 libfontconfig1-dev libopenjpeg-dev python-setuptools python-dev
+RUN apt-get install -y gobject-introspection libgirepository1.0-dev gtk-doc-tools libglib2.0-dev libjpeg62-turbo-dev libpng-dev libwebp-dev libtiff5-dev libexif-dev libxml2-dev swig libpango1.0-dev libmatio-dev libopenslide-dev libgif-dev librsvg2-dev libfftw3-dev liblcms2-dev libpangoft2-1.0-0 liborc-0.4-dev libcairo2-dev libfontconfig1 libfontconfig1-dev python-setuptools python-dev
 
 # POPPLER
 ENV poppler_version=0.59.0
@@ -26,7 +26,7 @@ RUN tar xf poppler-${poppler_version}.tar.xz && cd poppler-${poppler_version} &&
 RUN rm -rf poppler*
 
 # LIBVIPS
-ENV libvips_version=8.6.1
+ENV libvips_version=8.6.3
 RUN curl -OL https://github.com/jcupitt/libvips/releases/download/v${libvips_version}/vips-${libvips_version}.tar.gz
 RUN tar zvxf vips-${libvips_version}.tar.gz && cd vips-${libvips_version} && ./configure $1 && make && make install
 RUN rm -rf vips*
