@@ -45,7 +45,7 @@ RUN mv phantomjs-${phantomjs_version}-linux-x86_64/bin/phantomjs /usr/local/bin 
 RUN apt-get -y install fontforge python-fontforge
 
 # HARFBUZZ
-ENV harfbuzz_version=1.3.0
+ENV harfbuzz_version=1.8.5
 RUN wget --no-check-certificate http://www.freedesktop.org/software/harfbuzz/release/harfbuzz-${harfbuzz_version}.tar.bz2 && tar -xjf harfbuzz-${harfbuzz_version}.tar.bz2 --no-same-owner
 RUN cd harfbuzz-${harfbuzz_version} && ./configure && make && make install && rm -rf harfbuzz*
 
@@ -80,8 +80,6 @@ RUN cd woff2 && make clean all
 RUN mv woff2/woff2_* /usr/local/bin && rm -rf woff2
 
 # NODEJS
-RUN curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh
-RUN bash nodesource_setup.sh
 RUN apt-get -y install nodejs
 
 # NGINX
