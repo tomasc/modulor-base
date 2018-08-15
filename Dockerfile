@@ -8,7 +8,7 @@ ENV LANG C.UTF-8
 RUN apt-get -q update
 
 # BASE
-RUN apt-get -y install build-essential git-core libtag1-dev nano cron xvfb expect-dev unzip apt-transport-https
+RUN apt-get -y install build-essential git-core libtag1-dev nano cron xvfb expect-dev unzip apt-transport-https lsb-release
 
 # QT5
 RUN apt-get -y install qt5-default libqt5webkit5-dev
