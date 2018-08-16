@@ -80,6 +80,7 @@ RUN cd woff2 && make clean all
 RUN mv woff2/woff2_* /usr/local/bin && rm -rf woff2
 
 # NODEJS
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
 RUN apt-get -y install nodejs
 
 # NGINX
