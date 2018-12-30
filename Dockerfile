@@ -2,8 +2,6 @@ FROM ruby:2.5.1
 MAINTAINER Tomas Celizna <tomas.celizna@gmail.com>
 ENV LANG C.UTF-8
 
-# ---------------------------------------------------------------------
-
 # UPDATE
 RUN apt-get -q update
 
@@ -20,13 +18,13 @@ RUN apt-get -y install ghostscript
 RUN apt-get install -y gobject-introspection libgirepository1.0-dev gtk-doc-tools libglib2.0-dev libjpeg62-turbo-dev libpng-dev libwebp-dev libtiff5-dev libexif-dev libxml2-dev swig libpango1.0-dev libmatio-dev libopenslide-dev libgif-dev librsvg2-dev libfftw3-dev liblcms2-dev libpangoft2-1.0-0 liborc-0.4-dev libcairo2-dev libfontconfig1 libfontconfig1-dev python-setuptools python-dev
 
 # POPPLER
-ENV poppler_version=0.59.0
+ENV poppler_version=0.72.0
 RUN curl -O https://poppler.freedesktop.org/poppler-${poppler_version}.tar.xz
 RUN tar xf poppler-${poppler_version}.tar.xz && cd poppler-${poppler_version} && ./configure --prefix=/usr --sysconfdir=/etc --disable-static --enable-build-type=release --enable-cmyk --enable-xpdf-headers --with-testdatadir=$PWD/testfiles && make && make install
 RUN rm -rf poppler*
 
 # LIBVIPS
-ENV libvips_version=8.6.3
+ENV libvips_version=8.7.0
 RUN curl -OL https://github.com/jcupitt/libvips/releases/download/v${libvips_version}/vips-${libvips_version}.tar.gz
 RUN tar zvxf vips-${libvips_version}.tar.gz && cd vips-${libvips_version} && ./configure $1 && make && make install
 RUN rm -rf vips*
@@ -36,32 +34,27 @@ RUN ldconfig
 # PDFTK
 RUN apt-get -y install pdftk
 
-# PHANTOMJS
-ENV phantomjs_version=2.1.1
-RUN wget --no-check-certificate https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-${phantomjs_version}-linux-x86_64.tar.bz2 && tar -xjf phantomjs-${phantomjs_version}-linux-x86_64.tar.bz2
-RUN mv phantomjs-${phantomjs_version}-linux-x86_64/bin/phantomjs /usr/local/bin && chmod +x /usr/local/bin/phantomjs && rm -rf phantomjs*
-
 # FONTFORGE
 RUN apt-get -y install fontforge python-fontforge
 
 # HARFBUZZ
-ENV harfbuzz_version=1.8.5
+ENV harfbuzz_version=2.3.0
 RUN wget --no-check-certificate http://www.freedesktop.org/software/harfbuzz/release/harfbuzz-${harfbuzz_version}.tar.bz2 && tar -xjf harfbuzz-${harfbuzz_version}.tar.bz2 --no-same-owner
 RUN cd harfbuzz-${harfbuzz_version} && ./configure && make && make install && rm -rf harfbuzz*
 
 # MuPDF
-ENV mupdf_version=1.11
+ENV mupdf_version=1.14
 RUN wget --no-check-certificate https://mupdf.com/downloads/archive/mupdf-${mupdf_version}-source.tar.gz && tar zvxf mupdf-${mupdf_version}-source.tar.gz
 RUN cd mupdf-${mupdf_version}-source && make HAVE_X11=no HAVE_GLFW=no prefix=/usr/local install && rm -rf mupdf-*
 
 # FONTTOOLS
-ENV fonttools_version=3.15.1
+ENV fonttools_version=3.34.2
 RUN wget --no-check-certificate https://github.com/fonttools/fonttools/releases/download/${fonttools_version}/fonttools-${fonttools_version}.zip && unzip fonttools-${fonttools_version}.zip
 RUN easy_install pip
 RUN cd fonttools-${fonttools_version} && make && make install && rm -rf fonttools* && rm -rf fonttools-${fonttools_version}.tar.gz
 
 # OT-SANITIZER
-ENV ots_version=5.2.0
+ENV ots_version=7.1.8
 RUN wget --no-check-certificate https://github.com/khaledhosny/ots/releases/download/v${ots_version}/ots-${ots_version}.tar.gz && tar -zxf ots-${ots_version}.tar.gz
 RUN cd ots-${ots_version} && ./configure && make && make install && rm -rf ots-*
 
@@ -80,7 +73,7 @@ RUN cd woff2 && make clean all
 RUN mv woff2/woff2_* /usr/local/bin && rm -rf woff2
 
 # NODEJS
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_11.x | bash -
 RUN apt-get -y install nodejs
 
 # NGINX
@@ -102,7 +95,5 @@ RUN apt-get install kubectl
 RUN apt-get -q autoclean
 RUN apt-get -q clean
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-# ---------------------------------------------------------------------
 
 RUN gem install bundler --no-ri --no-rdoc
