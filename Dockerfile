@@ -18,7 +18,7 @@ RUN apt-get -y install ghostscript
 RUN apt-get install -y gobject-introspection libgirepository1.0-dev gtk-doc-tools libglib2.0-dev libjpeg62-turbo-dev libpng-dev libwebp-dev libtiff5-dev libexif-dev libxml2-dev swig libpango1.0-dev libmatio-dev libopenslide-dev libgif-dev librsvg2-dev libfftw3-dev liblcms2-dev libpangoft2-1.0-0 liborc-0.4-dev libcairo2-dev libfontconfig1 libfontconfig1-dev python-setuptools python-dev
 
 # POPPLER
-ENV poppler_version=0.72.0
+ENV poppler_version=0.59.0
 RUN curl -O https://poppler.freedesktop.org/poppler-${poppler_version}.tar.xz
 RUN tar xf poppler-${poppler_version}.tar.xz && cd poppler-${poppler_version} && ./configure --prefix=/usr --sysconfdir=/etc --disable-static --enable-build-type=release --enable-cmyk --enable-xpdf-headers --with-testdatadir=$PWD/testfiles && make && make install
 RUN rm -rf poppler*
