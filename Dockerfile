@@ -6,7 +6,7 @@ ENV LANG C.UTF-8
 RUN apt-get -q update
 
 # BASE
-RUN apt-get -y install build-essential git-core libtag1-dev nano cron xvfb expect-dev unzip apt-transport-https lsb-release
+RUN apt-get -y install build-essential cmake git-core libtag1-dev nano cron xvfb expect-dev unzip apt-transport-https lsb-release libx11-dev
 
 # QT5
 RUN apt-get -y install qt5-default libqt5webkit5-dev
@@ -24,9 +24,9 @@ RUN tar xf poppler-${poppler_version}.tar.xz && cd poppler-${poppler_version} &&
 RUN rm -rf poppler*
 
 # LIBVIPS
-ENV libvips_version=8.7.0
-RUN curl -OL https://github.com/jcupitt/libvips/releases/download/v${libvips_version}/vips-${libvips_version}.tar.gz
-RUN tar zvxf vips-${libvips_version}.tar.gz && cd vips-${libvips_version} && ./configure $1 && make && make install
+ENV libvips_version=8.7.2
+RUN curl -OL https://github.com/libvips/libvips/releases/download/v${libvips_version}/vips-${libvips_version}.tar.gz
+RUN tar xvf vips-${libvips_version}.tar.gz && cd vips-${libvips_version} && ./configure $1 && make && make install
 RUN rm -rf vips*
 RUN export GI_TYPELIB_PATH=/usr/local/lib/girepository-1.0/
 RUN ldconfig
@@ -43,9 +43,9 @@ RUN wget --no-check-certificate http://www.freedesktop.org/software/harfbuzz/rel
 RUN cd harfbuzz-${harfbuzz_version} && ./configure && make && make install && rm -rf harfbuzz*
 
 # MuPDF
-ENV mupdf_version=1.14
+ENV mupdf_version=1.14.0
 RUN wget --no-check-certificate https://mupdf.com/downloads/archive/mupdf-${mupdf_version}-source.tar.gz && tar zvxf mupdf-${mupdf_version}-source.tar.gz
-RUN cd mupdf-${mupdf_version}-source && make HAVE_X11=no HAVE_GLFW=no prefix=/usr/local install && rm -rf mupdf-*
+RUN cd mupdf-${mupdf_version}-source && make HAVE_X11=no HAVE_GLUT=no prefix=/usr/local install && rm -rf mupdf-*
 
 # FONTTOOLS
 ENV fonttools_version=3.34.2
@@ -54,7 +54,7 @@ RUN easy_install pip
 RUN cd fonttools-${fonttools_version} && make && make install && rm -rf fonttools* && rm -rf fonttools-${fonttools_version}.tar.gz
 
 # OT-SANITIZER
-ENV ots_version=7.1.8
+ENV ots_version=5.2.0
 RUN wget --no-check-certificate https://github.com/khaledhosny/ots/releases/download/v${ots_version}/ots-${ots_version}.tar.gz && tar -zxf ots-${ots_version}.tar.gz
 RUN cd ots-${ots_version} && ./configure && make && make install && rm -rf ots-*
 
