@@ -49,7 +49,7 @@ RUN cd mupdf-${mupdf_version}-source && make HAVE_X11=no HAVE_GLUT=no prefix=/us
 
 # FONTTOOLS
 ENV fonttools_version=3.34.2
-RUN wget --no-check-certificate https://github.com/fonttools/fonttools/releases/download/${fonttools_version}/fonttools-${fonttools_version}.zip && unzip fonttools-${fonttools_version}.zip
+RUN curl -OL https://github.com/fonttools/fonttools/releases/download/${fonttools_version}/fonttools-${fonttools_version}.zip && unzip fonttools-${fonttools_version}.zip
 RUN easy_install pip
 RUN cd fonttools-${fonttools_version} && make && make install && rm -rf fonttools* && rm -rf fonttools-${fonttools_version}.tar.gz
 
@@ -95,5 +95,3 @@ RUN apt-get install kubectl
 RUN apt-get -q autoclean
 RUN apt-get -q clean
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-RUN gem install bundler --no-ri --no-rdoc
