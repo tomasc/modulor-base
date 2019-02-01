@@ -1,4 +1,4 @@
-FROM tomasce/ruby:2.6.0
+FROM tomasce/ruby:2.6.1
 MAINTAINER Tomas Celizna <tomas.celizna@gmail.com>
 ENV LANG C.UTF-8
 
