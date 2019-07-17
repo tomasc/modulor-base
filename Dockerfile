@@ -6,7 +6,7 @@ ENV LANG C.UTF-8
 RUN apt-get -q update
 
 # BASE
-RUN apt-get -y install build-essential cmake git-core libtag1-dev nano cron xvfb expect-dev unzip apt-transport-https lsb-release libx11-dev
+RUN apt-get -y install build-essential cmake git-core libtag1-dev nano cron xvfb expect-dev unzip apt-transport-https lsb-release libx11-dev libnss3 libgconf-2-4
 
 # QT5
 RUN apt-get -y install qt5-default libqt5webkit5-dev
