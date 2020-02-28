@@ -31,6 +31,7 @@ RUN apk add --update --no-cache \
       pkgconfig \
       postgresql-dev \
       python \
+      sqlite-dev \
       tzdata \
       vips-dev \
       woff2-dev \
