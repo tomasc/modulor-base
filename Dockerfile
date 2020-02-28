@@ -26,6 +26,7 @@ RUN apk add --update --no-cache \
       make \
       netcat-openbsd \
       nodejs \
+      openssh-client \
       openssl \
       pkgconfig \
       postgresql-dev \
