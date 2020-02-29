@@ -6,7 +6,26 @@ ENV BUNDLER_VERSION ${BUNDLER_VERSION}
 RUN apk add --update --no-cache \
       --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing \
       --repository http://dl-cdn.alpinelinux.org/alpine/edge/main \
+    	autoconf \
+    	automake \
+    	bc \
+    	expat-dev \
+    	fftw-dev \
+    	giflib-dev \
+    	glib-dev \
+    	jpeg-dev \
+    	lcms2-dev \
+    	libexif-dev \
+    	libgsf-dev \
+    	libjpeg-turbo-dev \
+    	libpng-dev \
+    	libtool \
+    	libwebp-dev \
+    	orc-dev \
+    	tiff-dev \
+    	zlib-dev \
       binutils-gold \
+      build-base \
       build-base \
       ca-certificates \
       chromium \
@@ -14,14 +33,16 @@ RUN apk add --update --no-cache \
       file \
       fontforge-python3 \
       g++ \
-      glib-dev\
       gcc \
+      gdk-pixbuf-dev \
       git \
+      glib-dev\
       harfbuzz \
       less \
       libc-dev \
       libffi-dev \
       libgcrypt-dev \
+      librsvg-dev \
       libstdc++ \
       libxml2-dev \
       libxslt-dev \
@@ -33,13 +54,21 @@ RUN apk add --update --no-cache \
       openssh-client \
       openssl \
       pkgconfig \
+      poppler-dev \
       postgresql-dev \
       python \
       sqlite-dev \
       tzdata \
-      vips-dev \
       woff2-dev \
       yarn
+
+ARG VIPS_VERSION=8.9.1
+ARG VIPS_URL=https://github.com/libvips/libvips/releases/download
+RUN wget -O- ${VIPS_URL}/v${VIPS_VERSION}/vips-${VIPS_VERSION}.tar.gz | tar xzC /tmp
+RUN cd /tmp/vips-${VIPS_VERSION} \
+  	&& ./configure --prefix=/usr --disable-static --disable-debug \
+  	&& make V=0 \
+  	&& make install
 
 ENV CHROME_BIN_PATH /usr/bin/chromium-browser
 
