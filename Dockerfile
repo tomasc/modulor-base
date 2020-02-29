@@ -47,6 +47,7 @@ RUN apt-get install -y \
     libvips-dev \
     libwebp-dev \
     libxml2-dev \
+    libxss1 \
     mupdf \
     pdftk \
     python-dev \
