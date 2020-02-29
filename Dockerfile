@@ -53,6 +53,7 @@ RUN apt-get install -y \
     python-dev \
     python-fontforge \
     python-setuptools \
+    ttfautohint \
     woff2
 
 RUN apt-get -y install \
