@@ -8,10 +8,13 @@ RUN apk add --update --no-cache \
       --repository http://dl-cdn.alpinelinux.org/alpine/edge/main \
       binutils-gold \
       build-base \
+      ca-certificates \
+      chromium \
       curl \
       file \
       fontforge-dev \
       g++ \
+      glib-dev\
       gcc \
       git \
       harfbuzz \
@@ -26,6 +29,7 @@ RUN apk add --update --no-cache \
       make \
       netcat-openbsd \
       nodejs \
+      nss \
       openssh-client \
       openssl \
       pkgconfig \
@@ -36,6 +40,8 @@ RUN apk add --update --no-cache \
       vips-dev \
       woff2-dev \
       yarn
+
+ENV CHROME_BIN_PATH /usr/bin/chromium-browser
 
 ARG TTF2EOT_VERSION=0.0.2-2
 RUN wget --no-check-certificate https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/ttf2eot/ttf2eot-${TTF2EOT_VERSION}.tar.gz && tar -zxf ttf2eot-${TTF2EOT_VERSION}.tar.gz
