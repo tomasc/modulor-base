@@ -12,7 +12,7 @@ RUN apk add --update --no-cache \
       chromium \
       curl \
       file \
-      fontforge-dev \
+      fontforge-python3 \
       g++ \
       glib-dev\
       gcc \
