@@ -69,6 +69,8 @@ RUN cd /tmp/vips-${VIPS_VERSION} \
   	&& ./configure --prefix=/usr --disable-static --disable-debug \
   	&& make V=0 \
   	&& make install
+RUN rm -rf vips-${VIPS_VERSION}.tar.gz
+RUN rm -rf /tmp/vips-${VIPS_VERSION}
 
 ENV CHROME_BIN_PATH /usr/bin/chromium-browser
 
