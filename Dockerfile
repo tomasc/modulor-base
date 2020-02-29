@@ -55,8 +55,12 @@ RUN apt-get install -y \
     woff2
 
 RUN apt-get -y install \
-    nodejs \
-    yarn
+    nodejs
+
+# YARN
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN apt-get -q update && apt-get install -y yarn
 
 # HARFBUZZ
 RUN wget --no-check-certificate http://www.freedesktop.org/software/harfbuzz/release/harfbuzz-${HARFBUZZ_VERSION}.tar.xz && tar xf harfbuzz-${HARFBUZZ_VERSION}.tar.xz
