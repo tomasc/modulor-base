@@ -78,3 +78,4 @@ RUN apt-get -q clean
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN gem install bundler -v ${BUNDLER_VERSION}
+RUN gem update --system 3.0.8 && gem update --system
