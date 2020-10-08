@@ -66,7 +66,7 @@ RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources
 RUN apt-get -q update && apt-get install -y yarn
 
 # HARFBUZZ
-RUN wget --no-check-certificate http://www.freedesktop.org/software/harfbuzz/release/harfbuzz-${HARFBUZZ_VERSION}.tar.xz && tar xf harfbuzz-${HARFBUZZ_VERSION}.tar.xz
+RUN wget --no-check-certificate https://github.com/harfbuzz/harfbuzz/releases/download/${HARFBUZZ_VERSION}/harfbuzz-${HARFBUZZ_VERSION}.tar.xz && tar xf harfbuzz-${HARFBUZZ_VERSION}.tar.xz
 RUN cd harfbuzz-${HARFBUZZ_VERSION} && ./configure && make && make install && rm -rf harfbuzz*
 
 # TTF2EOT
