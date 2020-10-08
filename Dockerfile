@@ -1,10 +1,11 @@
-FROM ruby:2.7.1
+FROM ruby:2.7.2
 MAINTAINER Tomas Celizna <tomas.celizna@gmail.com>
 ENV LANG C.UTF-8
 
 ARG BUNDLER_VERSION=2.1.4
-ARG HARFBUZZ_VERSION=2.6.4
-ARG TTF2EOT_VERSION=0.0.2-2
+ARG RUBYGEMS_VERSION=3.1.4
+ARG HARFBUZZ_VERSION=2.7.2
+ARG TTF2EOT_VERSION=0.0.3
 
 RUN apt-get -q update
 
@@ -78,4 +79,4 @@ RUN apt-get -q clean
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN gem install bundler -v ${BUNDLER_VERSION}
-RUN gem update --system 3.0.8 && gem update --system
+RUN gem update --system ${RUBYGEMS_VERSION} && gem update --system
