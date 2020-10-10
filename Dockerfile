@@ -5,7 +5,7 @@ ENV LANG C.UTF-8
 ARG BUNDLER_VERSION=2.1.4
 ARG RUBYGEMS_VERSION=3.1.4
 ARG HARFBUZZ_VERSION=2.7.2
-ARG TTF2EOT_VERSION=0.0.3
+ARG TTF2EOT_VERSION=0.0.2-2
 
 RUN apt-get -q update
 
@@ -70,9 +70,9 @@ RUN wget --no-check-certificate https://github.com/harfbuzz/harfbuzz/releases/do
 RUN cd harfbuzz-${HARFBUZZ_VERSION} && ./configure && make && make install && rm -rf harfbuzz*
 
 # TTF2EOT
-RUN wget --no-check-certificate https://github.com/wget/ttf2eot/archive/v${TTF2EOT_VERSION}.tar.gz && tar -zxf v${TTF2EOT_VERSION}.tar.gz
-RUN sed -i.bak "/using std::vector;/ i\#include <cstddef>" /v${TTF2EOT_VERSION}/OpenTypeUtilities.h
-RUN cd v${TTF2EOT_VERSION} && make && cp ttf2eot /usr/local/bin/ttf2eot && rm -rf v${TTF2EOT_VERSION}
+RUN wget --no-check-certificate https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/ttf2eot/ttf2eot-${TTF2EOT_VERSION}.tar.gz && tar -zxf ttf2eot-${TTF2EOT_VERSION}.tar.gz
+RUN sed -i.bak "/using std::vector;/ i\#include <cstddef>" /ttf2eot-${TTF2EOT_VERSION}/OpenTypeUtilities.h
+RUN cd ttf2eot-${TTF2EOT_VERSION} && make && cp ttf2eot /usr/local/bin/ttf2eot && rm -rf ttf2eot*
 
 RUN apt-get -q autoclean
 RUN apt-get -q clean
