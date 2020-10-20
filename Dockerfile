@@ -24,6 +24,7 @@ RUN apt-get -y install \
     unzip
 
 RUN apt-get install -y \
+    ffmpeg \
     fontforge \
     gobject-introspection \
     gtk-doc-tools \
