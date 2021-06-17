@@ -1,4 +1,4 @@
-FROM ruby:3.0.0
+FROM ruby:3.0.1
 MAINTAINER Tomas Celizna <tomas.celizna@gmail.com>
 ENV LANG C.UTF-8
 
