@@ -53,7 +53,7 @@ RUN apt-get install -y \
     mupdf \
     pdftk \
     python-dev \
-    python-fontforge \
+    python3-fontforge \
     python-setuptools \
     ttfautohint \
     woff2
