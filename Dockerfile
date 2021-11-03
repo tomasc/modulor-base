@@ -1,5 +1,5 @@
 FROM ruby:2.7.2
-MAINTAINER Tomas Celizna <tomas.celizna@gmail.com>
+LABEL Tomas Celizna <tomas.celizna@gmail.com>
 ENV LANG C.UTF-8
 
 ARG BUNDLER_VERSION=2.1.4
