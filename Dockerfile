@@ -1,5 +1,5 @@
 FROM ruby:3.1.2
-MAINTAINER Tomas Celizna <tomas.celizna@gmail.com>
+MAINTAINER Tomas Celizna <mail@tomascelizna.com>
 ENV LANG C.UTF-8
 
 ARG BUNDLER_VERSION=2.3.12
@@ -7,7 +7,7 @@ ARG RUBYGEMS_VERSION=3.3.12
 ARG HARFBUZZ_VERSION=2.7.2
 ARG TTF2EOT_VERSION=0.0.2-2
 
-RUN apt-get -q update
+RUN apt-get -y update
 
 RUN apt-get -y install \
     apt-transport-https \
@@ -53,11 +53,12 @@ RUN apt-get install -y \
     mupdf \
     pdftk \
     python-dev \
-    python-fontforge \
+    python3-fontforge \
     python-setuptools \
     ttfautohint \
     woff2
 
+# NODE
 RUN apt-get -y install \
     nodejs
 
