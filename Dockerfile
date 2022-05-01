@@ -21,6 +21,8 @@ RUN apt-get -y install \
     libtag1-dev \
     lsb-release \
     nano \
+    libyaml-dev \
+    ruby-psych \
     unzip
 
 RUN apt-get install -y \
