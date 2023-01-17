@@ -1,10 +1,10 @@
-FROM ruby:3.1.2
+FROM ruby:3.2.0
 MAINTAINER Tomas Celizna <mail@tomascelizna.com>
 ENV LANG C.UTF-8
 
-ARG BUNDLER_VERSION=2.3.12
-ARG RUBYGEMS_VERSION=3.3.12
-ARG HARFBUZZ_VERSION=2.7.2
+ARG BUNDLER_VERSION=2.4.4
+ARG RUBYGEMS_VERSION=3.4.4
+ARG HARFBUZZ_VERSION=5.3.1
 ARG TTF2EOT_VERSION=0.0.2-2
 
 RUN apt-get -y update
@@ -28,15 +28,17 @@ RUN apt-get -y install \
 RUN apt-get install -y \
     ffmpeg \
     fontforge \
-    gobject-introspection \
+    fontforge \
+    gcc \
+    g++ \
     gtk-doc-tools \
     libcairo2-dev \
     libexif-dev \
+    libfreetype6-dev \
     libfftw3-dev \
     libfontconfig1 \
     libfontconfig1-dev \
     libgif-dev \
-    libgirepository1.0-dev \
     libglib2.0-dev \
     libjpeg62-turbo-dev \
     liblcms2-dev \
@@ -52,11 +54,13 @@ RUN apt-get install -y \
     libwebp-dev \
     libxml2-dev \
     libxss1 \
+    meson \
     mupdf \
     pdftk \
+    pkg-config \
     python-dev \
-    python3-fontforge \
     python-setuptools \
+    python3-fontforge \
     ttfautohint \
     woff2
 
@@ -71,7 +75,7 @@ RUN apt-get -q update && apt-get install -y yarn
 
 # HARFBUZZ
 RUN wget --no-check-certificate https://github.com/harfbuzz/harfbuzz/releases/download/${HARFBUZZ_VERSION}/harfbuzz-${HARFBUZZ_VERSION}.tar.xz && tar xf harfbuzz-${HARFBUZZ_VERSION}.tar.xz
-RUN cd harfbuzz-${HARFBUZZ_VERSION} && ./configure && make && make install && rm -rf harfbuzz*
+RUN cd harfbuzz-${HARFBUZZ_VERSION} && meson build && meson compile -C build && rm -rf harfbuzz*
 
 # TTF2EOT
 RUN wget --no-check-certificate https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/ttf2eot/ttf2eot-${TTF2EOT_VERSION}.tar.gz && tar -zxf ttf2eot-${TTF2EOT_VERSION}.tar.gz
