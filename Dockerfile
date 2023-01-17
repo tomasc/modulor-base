@@ -86,5 +86,5 @@ RUN apt-get -q autoclean
 RUN apt-get -q clean
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN gem install bundler -v ${BUNDLER_VERSION}
 RUN gem update --system ${RUBYGEMS_VERSION} && gem update --system
+RUN gem install bundler -v ${BUNDLER_VERSION}
