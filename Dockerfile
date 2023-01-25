@@ -4,7 +4,7 @@ ENV LANG C.UTF-8
 
 ARG BUNDLER_VERSION=2.4.4
 ARG RUBYGEMS_VERSION=3.4.4
-ARG HARFBUZZ_VERSION=5.3.1
+ARG HARFBUZZ_VERSION=6.0.0
 ARG TTF2EOT_VERSION=0.0.2-2
 
 RUN apt-get -y update
@@ -61,6 +61,7 @@ RUN apt-get install -y \
     python-dev \
     python-setuptools \
     python3-fontforge \
+    ragel \
     ttfautohint \
     woff2
 
@@ -74,13 +75,13 @@ RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources
 RUN apt-get -q update && apt-get install -y yarn
 
 # HARFBUZZ
-RUN wget --no-check-certificate https://github.com/harfbuzz/harfbuzz/releases/download/${HARFBUZZ_VERSION}/harfbuzz-${HARFBUZZ_VERSION}.tar.xz && tar xf harfbuzz-${HARFBUZZ_VERSION}.tar.xz
-RUN cd harfbuzz-${HARFBUZZ_VERSION} && meson build && meson compile -C build && rm -rf harfbuzz*
+RUN wget --no-check-certificate https://github.com/harfbuzz/harfbuzz/releases/download/${HARFBUZZ_VERSION}/harfbuzz-${HARFBUZZ_VERSION}.tar.xz && tar xf harfbuzz-${HARFBUZZ_VERSION}.tar.xz && rm -rf /harfbuzz-${HARFBUZZ_VERSION}.tar.xz
+RUN cd harfbuzz-${HARFBUZZ_VERSION} && meson build && meson compile -C build && cd /usr/local/bin && ln -s /harfbuzz-${HARFBUZZ_VERSION}/build/util/hb-view hb-view && cd /
 
 # TTF2EOT
 RUN wget --no-check-certificate https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/ttf2eot/ttf2eot-${TTF2EOT_VERSION}.tar.gz && tar -zxf ttf2eot-${TTF2EOT_VERSION}.tar.gz
 RUN sed -i.bak "/using std::vector;/ i\#include <cstddef>" /ttf2eot-${TTF2EOT_VERSION}/OpenTypeUtilities.h
-RUN cd ttf2eot-${TTF2EOT_VERSION} && make && cp ttf2eot /usr/local/bin/ttf2eot && rm -rf ttf2eot*
+RUN cd ttf2eot-${TTF2EOT_VERSION} && make && cp ttf2eot /usr/local/bin/ttf2eot && cd / && rm -rf /ttf2eot*
 
 RUN apt-get -q autoclean
 RUN apt-get -q clean
