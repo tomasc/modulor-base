@@ -1,11 +1,12 @@
-FROM ruby:3.2.2
+FROM ruby:3.3.0
 MAINTAINER Tomas Celizna <mail@tomascelizna.com>
 ENV LANG C.UTF-8
 
-ARG BUNDLER_VERSION=2.4.10
-ARG RUBYGEMS_VERSION=3.4.10
-ARG HARFBUZZ_VERSION=7.1.0
+ARG BUNDLER_VERSION=2.5.3
+ARG RUBYGEMS_VERSION=3.5.3
+ARG HARFBUZZ_VERSION=8.3.0
 ARG TTF2EOT_VERSION=0.0.2-2
+ARG NODE_MAJOR=20
 
 RUN apt-get -y update
 
@@ -27,7 +28,6 @@ RUN apt-get -y install \
 
 RUN apt-get install -y \
     ffmpeg \
-    fontforge \
     fontforge \
     gcc \
     g++ \
@@ -58,16 +58,19 @@ RUN apt-get install -y \
     mupdf \
     pdftk \
     pkg-config \
-    python-dev \
-    python-setuptools \
+    python-dev-is-python3 \
     python3-fontforge \
     ragel \
     ttfautohint \
     woff2
 
 # NODE
-RUN apt-get -y install \
-    nodejs
+RUN apt-get install -y ca-certificates curl gnupg \
+    && mkdir -p /etc/apt/keyrings \
+    && curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg \
+    && echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_${NODE_MAJOR}.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list \
+    && apt-get update \
+    && apt-get install nodejs -y
 
 # YARN
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
@@ -85,7 +88,7 @@ RUN cd ttf2eot-${TTF2EOT_VERSION} && make && cp ttf2eot /usr/local/bin/ttf2eot &
 
 RUN apt-get -q autoclean
 RUN apt-get -q clean
-RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/*
 
 RUN gem update --system ${RUBYGEMS_VERSION} && gem update --system
 RUN gem install bundler -v ${BUNDLER_VERSION}
