@@ -1,5 +1,4 @@
 FROM ruby:3.3.4
-MAINTAINER Tomas Celizna <mail@tomascelizna.com>
 ENV LANG C.UTF-8
 
 ARG BUNDLER_VERSION=2.5.11
@@ -40,6 +39,7 @@ RUN apt-get install -y \
     libfontconfig1-dev \
     libgif-dev \
     libglib2.0-dev \
+    libjemalloc2 \
     libjpeg62-turbo-dev \
     liblcms2-dev \
     libmatio-dev \
