@@ -10,13 +10,11 @@ ARG NODE_MAJOR=25
 RUN apt-get -y update
 
 RUN apt-get -y install \
-  apt-transport-https \
   build-essential \
   cmake \
   cron \
   expect-dev \
   git-core \
-  libgconf-2-4 \
   libnss3 \
   libtag1-dev \
   lsb-release \
@@ -49,7 +47,7 @@ RUN apt-get install -y \
   libpangoft2-1.0-0 \
   libpng-dev \
   librsvg2-dev \
-  libtiff5-dev \
+  libtiff-dev \
   libvips-dev \
   libwebp-dev \
   libxml2-dev \
@@ -73,9 +71,9 @@ RUN apt-get install -y ca-certificates curl gnupg \
   && apt-get install nodejs -y
 
 # YARN
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-RUN apt-get -q update && apt-get install -y yarn
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor -o /etc/apt/keyrings/yarn.gpg \
+  && echo "deb [signed-by=/etc/apt/keyrings/yarn.gpg] https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
+  && apt-get -q update && apt-get install -y yarn
 
 # HARFBUZZ
 RUN wget --no-check-certificate https://github.com/harfbuzz/harfbuzz/releases/download/${HARFBUZZ_VERSION}/harfbuzz-${HARFBUZZ_VERSION}.tar.xz && tar xf harfbuzz-${HARFBUZZ_VERSION}.tar.xz && rm -rf /harfbuzz-${HARFBUZZ_VERSION}.tar.xz
@@ -90,5 +88,5 @@ RUN apt-get -q autoclean
 RUN apt-get -q clean
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/*
 
-RUN gem update --system ${RUBYGEMS_VERSION} && gem update --system
+RUN gem update --system ${RUBYGEMS_VERSION}
 RUN gem install bundler -v ${BUNDLER_VERSION}
