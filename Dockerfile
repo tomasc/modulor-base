@@ -1,76 +1,76 @@
-FROM ruby:3.4.5
+FROM ruby:4.0.0
 ENV LANG=C.UTF-8
 
-ARG BUNDLER_VERSION=2.7.0
-ARG RUBYGEMS_VERSION=3.7.0
-ARG HARFBUZZ_VERSION=11.2.1
+ARG BUNDLER_VERSION=4.0.3
+ARG RUBYGEMS_VERSION=4.0.3
+ARG HARFBUZZ_VERSION=12.3.0
 ARG TTF2EOT_VERSION=0.0.2-2
-ARG NODE_MAJOR=24
+ARG NODE_MAJOR=25
 
 RUN apt-get -y update
 
 RUN apt-get -y install \
-    apt-transport-https \
-    build-essential \
-    cmake \
-    cron \
-    expect-dev \
-    git-core \
-    libgconf-2-4 \
-    libnss3 \
-    libtag1-dev \
-    lsb-release \
-    nano \
-    libyaml-dev \
-    ruby-psych \
-    unzip
+  apt-transport-https \
+  build-essential \
+  cmake \
+  cron \
+  expect-dev \
+  git-core \
+  libgconf-2-4 \
+  libnss3 \
+  libtag1-dev \
+  lsb-release \
+  nano \
+  libyaml-dev \
+  ruby-psych \
+  unzip
 
 RUN apt-get install -y \
-    ffmpeg \
-    fontforge \
-    gcc \
-    g++ \
-    gtk-doc-tools \
-    libcairo2-dev \
-    libexif-dev \
-    libfreetype6-dev \
-    libfftw3-dev \
-    libfontconfig1 \
-    libfontconfig1-dev \
-    libgif-dev \
-    libglib2.0-dev \
-    libjemalloc2 \
-    libjpeg62-turbo-dev \
-    liblcms2-dev \
-    libmatio-dev \
-    libopenslide-dev \
-    liborc-0.4-dev \
-    libpango1.0-dev \
-    libpangoft2-1.0-0 \
-    libpng-dev \
-    librsvg2-dev \
-    libtiff5-dev \
-    libvips-dev \
-    libwebp-dev \
-    libxml2-dev \
-    libxss1 \
-    meson \
-    mupdf \
-    pdftk \
-    pkg-config \
-    python-dev-is-python3 \
-    python3-fontforge \
-    ragel \
-    ttfautohint \
-    woff2
+  ffmpeg \
+  fontforge \
+  gcc \
+  g++ \
+  gtk-doc-tools \
+  libcairo2-dev \
+  libexif-dev \
+  libfreetype6-dev \
+  libfftw3-dev \
+  libfontconfig1 \
+  libfontconfig1-dev \
+  libgif-dev \
+  libglib2.0-dev \
+  libjemalloc2 \
+  libjpeg62-turbo-dev \
+  liblcms2-dev \
+  libmatio-dev \
+  libopenslide-dev \
+  liborc-0.4-dev \
+  libpango1.0-dev \
+  libpangoft2-1.0-0 \
+  libpng-dev \
+  librsvg2-dev \
+  libtiff5-dev \
+  libvips-dev \
+  libwebp-dev \
+  libxml2-dev \
+  libxss1 \
+  meson \
+  mupdf \
+  pdftk \
+  pkg-config \
+  python-dev-is-python3 \
+  python3-fontforge \
+  ragel \
+  ttfautohint \
+  woff2
 
 # NODE
 RUN apt-get install -y ca-certificates curl gnupg \
-    && mkdir -p /etc/apt/keyrings \
-    && curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg \
-    && echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_${NODE_MAJOR}.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list \
-    && apt-get update \
-    && apt-get install nodejs -y
+  && mkdir -p /etc/apt/keyrings \
+  && curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg \
+  && echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_${NODE_MAJOR}.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list \
+  && apt-get update \
+  && apt-get install nodejs -y
 
 # YARN
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
