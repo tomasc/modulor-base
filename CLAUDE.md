@@ -8,7 +8,14 @@ modulor-base is a Docker base image published to Docker Hub (`tomasce/modulor-ba
 
 ## Build Commands
 
-Build and push multi-platform image:
+### One-time setup for multi-platform builds
+
+Multi-platform builds require a buildx builder with the `docker-container` driver:
+```bash
+docker buildx create --name multiplatform --driver docker-container --use
+```
+
+### Build and push multi-platform image
 ```bash
 docker buildx build --platform=linux/amd64,linux/arm64 -t tomasce/modulor-base:<version> --push .
 ```
