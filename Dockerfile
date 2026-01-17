@@ -15,6 +15,7 @@ RUN apt-get -y install \
   cron \
   expect-dev \
   git-core \
+  libclang-dev \
   libnss3 \
   libtag1-dev \
   lsb-release \
