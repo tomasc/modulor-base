@@ -1,11 +1,11 @@
-FROM ruby:4.0
+FROM ruby:4.0.6
 ENV LANG=C.UTF-8
 
-ARG BUNDLER_VERSION=4.0.3
-ARG RUBYGEMS_VERSION=4.0.3
-ARG HARFBUZZ_VERSION=12.3.0
+ARG BUNDLER_VERSION=4.0.20
+ARG RUBYGEMS_VERSION=4.0.20
+ARG HARFBUZZ_VERSION=14.4.0
 ARG TTF2EOT_VERSION=0.0.2-2
-ARG NODE_MAJOR=25
+ARG NODE_MAJOR=26
 
 RUN apt-get -y update
 
@@ -58,7 +58,9 @@ RUN apt-get install -y \
   pdftk \
   pkg-config \
   python-dev-is-python3 \
+  python3-brotli \
   python3-fontforge \
+  python3-fonttools \
   ragel \
   ttfautohint \
   woff2
