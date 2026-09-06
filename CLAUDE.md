@@ -37,10 +37,41 @@ Versions are defined as ARGs at the top of the Dockerfile:
 
 ## Included Tools
 
-- **Media**: ffmpeg, libvips, mupdf, pdftk
-- **Fonts**: fontforge, fontTools (+brotli, for woff/woff2 and vertical metrics), harfbuzz (hb-view), ttf2eot, ttfautohint, woff2
+- **Media**: ffmpeg (+ffprobe), libvips (+`vips` CLI), pdftk, imagemagick (from the ruby base)
+- **Fonts**: fontforge (+python3-fontforge), fontTools (+brotli, for woff/woff2 and vertical metrics), harfbuzz (hb-view), ttf2eot, ttfautohint, woff2
 - **Graphics**: cairo, freetype, pango, librsvg
 - **Package managers**: yarn, npm, bundler
+- **Misc**: zip/unzip (`modulor cli skill package` shells out to `zip`), nano (`EDITOR`/`VISUAL`)
+
+Everything here is invoked by name from modulor or an app — `git grep` for
+`Open3`/`%x(`/`system(` before removing one.
+
+## Image Size
+
+~2.5GB. The four things keeping it there, each of which a well-meaning edit
+would undo:
+
+- **harfbuzz is built `--buildtype=release --default-library=static` and
+  installed**, so the source tree is deleted in the same layer. meson defaults
+  to a debug build: leaving the tree behind (with `hb-view` symlinked into it)
+  cost 806MB.
+- **`--no-install-recommends`**, with `libvips-tools` and `poppler-data` named
+  explicitly because we do want those two. Worth ~330MB.
+- **`/etc/dpkg/dpkg.cfg.d/01-nodoc`**, written before the first install. ~150MB.
+- **apt lists are removed inside the RUN that creates them.** A trailing
+  `apt-get clean` in its own layer saves nothing — the bytes still ship.
+
+Deliberately *not* installed: `libclang-dev` (387MB of llvm, nothing uses it),
+`mupdf` (`mutool` is never called), `ruby-psych` (Debian's ruby 3.3, shadowed by
+the compiled one; `libyaml-dev` is what psych actually needs), `gtk-doc-tools`
+(only built harfbuzz's docs, now disabled). `libopenslide-dev` / `libmatio-dev`
+are already `libvips-dev` dependencies.
+
+Two further wins not taken: `pdftk` drags in a 194MB JRE for one
+`dump_data` call in `HasPdfMetadata` (`pdfinfo` from poppler-utils answers the
+same three questions), and `ruby:4.0.6-slim` would drop the ~830MB
+buildpack-deps layers — but the apps `bundle install` against this image, and
+acpa's cover script shells out to `magick`, which comes from there.
 
 ## Versioning
 
