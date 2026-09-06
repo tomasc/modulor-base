@@ -70,9 +70,9 @@ RUN apt-get -y update && apt-get -y install --no-install-recommends \
   libxml2-dev \
   libxss1 \
   meson \
-  pdftk \
   pkg-config \
   poppler-data \
+  poppler-utils \
   python-dev-is-python3 \
   python3-brotli \
   python3-fontforge \

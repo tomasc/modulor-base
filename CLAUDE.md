@@ -37,7 +37,7 @@ Versions are defined as ARGs at the top of the Dockerfile:
 
 ## Included Tools
 
-- **Media**: ffmpeg (+ffprobe), libvips (+`vips` CLI), pdftk, imagemagick (from the ruby base)
+- **Media**: ffmpeg (+ffprobe), libvips (+`vips` CLI), poppler-utils (`pdfinfo`, for PDF page metadata), imagemagick (from the ruby base)
 - **Fonts**: fontforge (+python3-fontforge), fontTools (+brotli, for woff/woff2 and vertical metrics), harfbuzz (hb-view), ttf2eot, ttfautohint, woff2
 - **Graphics**: cairo, freetype, pango, librsvg
 - **Package managers**: yarn, npm, bundler
@@ -67,11 +67,14 @@ the compiled one; `libyaml-dev` is what psych actually needs), `gtk-doc-tools`
 (only built harfbuzz's docs, now disabled). `libopenslide-dev` / `libmatio-dev`
 are already `libvips-dev` dependencies.
 
-Two further wins not taken: `pdftk` drags in a 194MB JRE for one
-`dump_data` call in `HasPdfMetadata` (`pdfinfo` from poppler-utils answers the
-same three questions), and `ruby:4.0.6-slim` would drop the ~830MB
-buildpack-deps layers — but the apps `bundle install` against this image, and
-acpa's cover script shells out to `magick`, which comes from there.
+`pdftk` was dropped in 4.0.6 and its 194MB `openjdk-21-jre-headless` with it:
+it served one `dump_data` call in `HasPdfMetadata`, which `pdfinfo` answers in a
+single call from a 1.1MB package (tomasc/modulor#2894).
+
+`ruby:4.0.6-slim` is measured and declined — 210MB, against a hand-curated
+header list that fails in an app's CI rather than here. See modulor-base#1 for
+the numbers, including the 917MB that is build-only and what a runtime/builder
+split would take.
 
 ## Versioning
 
