@@ -28,11 +28,11 @@ docker build -t tomasce/modulor-base:<version> .
 ## Version Components
 
 Versions are defined as ARGs at the top of the Dockerfile:
-- Ruby: 4.0.6 (base image, pinned)
+- Ruby: 4.0.9 (base image, pinned)
 - Node.js: 26.x
-- Bundler: 4.0.20
-- RubyGems: 4.0.20
-- Harfbuzz: 14.4.0
+- Bundler: 4.0.23
+- RubyGems: 4.0.23
+- Harfbuzz: 15.0.0
 - TTF2EOT: 0.0.2-2
 
 ## Included Tools
